@@ -9,7 +9,7 @@ const router = useRouter();
       {/* <img src="/box.svg" /> */}
         <div>
           <Link  href="/">Home</Link>
-          <img src ="/line.svg" />
+          <img className="line" src ="/line.svg" />
         </div>
       <div>
         <Link href="/about">About</Link>
@@ -17,12 +17,11 @@ const router = useRouter();
       </div>
       <style jsx global>{`
       nav {
-       border:1px solid red;
        display: flex;
        justify-content:space-between;
        
       }
-      div a {
+      nav div a {
         font-size:40px;
         color:black;
         text-decoration:none;
@@ -33,7 +32,7 @@ const router = useRouter();
         flex-direction:column;
         text-align:center;
       }
-      img {
+      .line {
         width:120px
       }
       
