@@ -6,15 +6,35 @@ export default function NavBar() {
 const router = useRouter();
   return (
     <nav>
-      <Link  href="/" className={router.pathname ==="/" ? "active":""}>Home</Link>
-      <Link href="/about" className={router.pathname ==="/about" ? "active":""} >About</Link>
-      
+      {/* <img src="/box.svg" /> */}
+        <div>
+          <Link  href="/">Home</Link>
+          <img src ="/line.svg" />
+        </div>
+      <div>
+        <Link href="/about">About</Link>
+        <img src ="/line.svg" />
+      </div>
       <style jsx global>{`
-      a {
+      nav {
+       border:1px solid red;
+       display: flex;
+       justify-content:space-between;
+       
+      }
+      div a {
+        font-size:40px;
+        color:black;
         text-decoration:none;
       }
-      .active{
-        color:red;
+      nav div {
+        margin:0 20px;
+        display:flex;
+        flex-direction:column;
+        text-align:center;
+      }
+      img {
+        width:120px
       }
       
       `}</style>
