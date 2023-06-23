@@ -19,16 +19,16 @@ useEffect(()=>{
       <div className="containter">
           {books?.map((v)=>(
             <div className="box">
-              <div className="booklist">
                 <h4 className="title">{v.display_name}</h4>
-              </div>
+                
+              <img className="book-img" src="box.svg" />
+              
             </div>
           ))}
     </div>
     <style jsx>{`
        .containter {
         position: relative;
-
         border: 1px solid red;
         display: flex;
         flex-wrap:wrap;
@@ -38,49 +38,37 @@ useEffect(()=>{
         padding:20px;
        }
     .box{
-     
       border: 1px solid yellow;
       height: 100px;
+      line-height:100px;
       position: relative;
-     width: 300px;
-      text-align: center;
-      /* overflow:hidden; */
+      padding-left:10px;
+      padding-right:30px;
+      margin:10px 30px;
+      /* line-height:100px */
+      /* max-width:300px; */
     }
-    .booklist{
-      background: url(/box.svg) no-repeat top left;
-      background-size:cover;
+    .book-img{
+      
       position: absolute;
-      height: 100px;
-    /* height: 150px; */
-      top: 50%;
+      top: 0;
+      left:0;
+      width: inherit;
+      height: inherit;
+      object-fit: cover;
+      object-position:left;
+      
       
       border: 1px solid red;
-     /* position: absolute; */
-     /* top:50%; */
-     /* lef///t: 20%; */
-     /* left:5/0%; */
-     transform: translateY(-50%);                                                                   
-     /* font-size:5rem; */
-     /* color: white; */
-     /* z-index: 2; */
-     /* text-align: center; */
-}
-
-
- 
-
-
-
-    .title {
-     padding: 20px;
-     padding-right:50px;
-      font-size:20px;
-      /* width: 200px; */
-      /* height: 100px; */
-      text-align: center;
-     
       
+      /* width:inherit; */
+      /* height: inherit; */
     }
+   
+    
+
+
+
     `}</style>
     
     </>
