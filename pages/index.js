@@ -1,10 +1,17 @@
 import NavBar from "@/components/NavBar";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
+import Link from "next/link";
+import MetaHead from "@/components/MetaHead";
 
 export default function Home({results}) {
 const router = useRouter();
+const onClick = (name, encodeName) => {
+  router.push({
+    pathname: `/list/${encodeName}`,
+    query: { title:name },
+    })
+}
 const [books, setBooks] =useState([]);
 useEffect(()=>{
   (async()=>{
@@ -15,62 +22,76 @@ useEffect(()=>{
 
   return (
    <>
-      <h1>The New York Times Best Seller Explorer</h1>
+       <MetaHead metaTitle="New York Times Best Seller" />
       <div className="containter">
+      <div  className="big-title">  <h1>The New York Times Best Seller Explorer</h1></div>
+      {!books && <h4 className="loading">Loading...</h4>}
           {books?.map((v)=>(
             <div className="box">
-                <h4 className="title">{v.display_name}</h4>
-                
-              <img className="book-img" src="box.svg" />
-              
-            </div>
+               <span className="box-span"></span>
+                <span className="box-span"></span>
+                <span className="box-span"></span>
+                <div className="title" >
+                  <Link 
+                  key={v.list_name} 
+                  href={`/list/${v.list_name_encoded}`} 
+                  onClick={()=>onClick(v.list_name, v.list_name_encoded)}>
+                    {v.display_name} <span className="arrow">→</span></Link>
+                  </div>
+                </div>
           ))}
     </div>
-    <style jsx>{`
-       .containter {
-        position: relative;
-        border: 1px solid red;
-        display: flex;
-        flex-wrap:wrap;
-        align-content:flex-start;
-        width: 1000px;
-        gap:40px;
-        padding:20px;
-       }
+    <style jsx global>{`
+
     .box{
-      border: 1px solid yellow;
-      height: 100px;
-      line-height:100px;
+      max-width:500px;
+      height: 125px;
+      padding-right:20px;
       position: relative;
-      padding-left:10px;
-      padding-right:30px;
-      margin:10px 30px;
-      /* line-height:100px */
-      /* max-width:300px; */
+      overflow:hidden;
+      margin:10px;
+      &:hover > .box-span {
+        border: 1px solid royalblue;
+      }
     }
-    .book-img{
-      
-      position: absolute;
-      top: 0;
-      left:0;
-      width: inherit;
-      height: inherit;
-      object-fit: cover;
-      object-position:left;
-      
-      
-      border: 1px solid red;
-      
-      /* width:inherit; */
-      /* height: inherit; */
+   .box-span{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    border-radius: 60% 30% 65% 35% / 40% 35% 55% 60%;
+
     }
    
+    .box span:nth-child(1){
+      transform:rotateX(30deg)
+    }
+    .box span:nth-child(2){
+      transform:rotateY(90deg))
+    }
+    .box span:nth-child(3){
+      transform:rotateX(130deg)
+    }
+  
+    .title a {
+      font-size:18px;
+      font-weight:bold;
+      display: inline-block;
+      /* position: absolute; */
+      transform: translate(10px, 20px);
+      padding: 30px 40px 20px 20px;
+      transition: 0.5s;
+      &:active >.arrow{
+        transform: translateX(10px);
+      }
+      &:hover >.arrow {
+        transform: translateX(10px);
+      }
+    }
     
-
-
+  
 
     `}</style>
-    
     </>
   );
 }
